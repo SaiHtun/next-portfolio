@@ -27,6 +27,10 @@ const Container = styled.div`
   padding-top: 100px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
+  @media only screen and (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -35,6 +39,10 @@ const ImageWrapper = styled.div`
   background-color: teal;
   order: ${(props) => (props.order === "true" ? 2 : 1)};
   text-align: center;
+
+  @media only screen and (max-width: 400px) {
+    order: 1;
+  }
 `;
 
 const Info = styled.div`
@@ -43,6 +51,10 @@ const Info = styled.div`
   .description {
     font-size: 14px;
     color: #9c9c9c;
+  }
+
+  @media only screen and (max-width: 400px) {
+    order: 2;
   }
 `;
 

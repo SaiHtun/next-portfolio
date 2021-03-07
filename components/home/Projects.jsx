@@ -22,6 +22,10 @@ const Container = styled.div`
 
 const ProjectsGrid = styled.div`
   padding: 0px 100px;
+
+  @media only screen and (max-width: 400px) {
+    padding: 0px 20px;
+  }
 `;
 
 const Title = styled.div`
@@ -31,12 +35,21 @@ const Title = styled.div`
   left: 0;
   position: relative;
 
+  @media only screen and (max-width: 400px) {
+    width: 100px;
+  }
+
   ::after {
     content: "Projects";
     position: absolute;
     left: 230px;
     bottom: -30px;
     font-size: 4em;
+
+    @media only screen and (max-width: 400px) {
+      left: 100px;
+      font-size: 3em;
+    }
   }
 `;
 

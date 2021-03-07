@@ -35,7 +35,7 @@ const Container = styled.nav`
     padding: 50px 50px;
   }
   @media only screen and (max-width: 400px) {
-    padding: 50px 30px;
+    padding: 50px 20px;
   }
 `;
 

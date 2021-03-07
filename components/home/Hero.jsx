@@ -8,16 +8,18 @@ export default function Hero() {
   return (
     <>
       <HeroWrapper>
-        <LandingText>
-          <div>
-            This is <span>Sai</span>
-          </div>
-          <div>
-            a <span>Designer</span>{" "}
-          </div>
-          <div>
-            who can <span>Code.</span>
-          </div>
+        <div>
+          <LandingText>
+            <div>
+              This is <span>Sai</span>
+            </div>
+            <div>
+              a <span>Designer</span>{" "}
+            </div>
+            <div>
+              who can <span>Code.</span>
+            </div>
+          </LandingText>
           <BtnWrapper className="btnResume">
             <Button
               className="btnResume"
@@ -27,7 +29,7 @@ export default function Hero() {
               <p>Resume</p>
             </Button>
           </BtnWrapper>
-        </LandingText>
+        </div>
         <ScrollDownArrow></ScrollDownArrow>
       </HeroWrapper>
     </>
@@ -45,6 +47,7 @@ const HeroWrapper = styled.main`
   /* background-color: #d3d3d3; */
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
 
   @media only screen and (max-width: 800px) {
@@ -56,7 +59,6 @@ const HeroWrapper = styled.main`
   }
   @media only screen and (max-width: 400px) {
     margin-left: 0px;
-    height: 50vh;
   }
 `;
 
@@ -96,10 +98,8 @@ const LandingText = styled.div`
   @media only screen and (max-width: 400px) {
     font-size: 4.5em;
     line-height: 60px;
-  }
-
-  div:nth-last-child(2) {
-    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-bottom: 15px;
   }
 `;
 
@@ -161,14 +161,14 @@ const Button = styled.div`
   font-size: 15px;
   font-weight: bold;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   transition: all 0.3s ease-out;
   cursor: pointer;
 
   p {
     pointer-events: none;
-
+    color: white;
     @media only screen and (max-width: 400px) {
       font-size: 13px;
       font-weight: 400;

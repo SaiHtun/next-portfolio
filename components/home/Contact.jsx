@@ -14,8 +14,10 @@ export default function Contact() {
             <Headline>
               <span>Sai Htun 谷忠信</span>
               <Socials>
+                <SocialIcon src="/facebook.svg"></SocialIcon>
                 <SocialIcon src="/github.svg"></SocialIcon>
-                <SocialIcon src="/world.svg"></SocialIcon>
+                <SocialIcon src="/twitter.svg"></SocialIcon>
+                <SocialIcon className="email" src="/gmail.svg"></SocialIcon>
               </Socials>
             </Headline>
             <Caption>This awesome developer is located at SF Bay Area.</Caption>
@@ -39,6 +41,10 @@ const Container = styled.div`
   padding-top: 150px;
   display: grid;
   grid-template-columns: 300px 1fr;
+
+  @media only screen and (max-width: 400px) {
+    padding-left: 0px;
+  }
 `;
 
 const Info = styled.div`
@@ -52,6 +58,10 @@ const Info = styled.div`
   p:nth-last-child(1) {
     color: rgba(0, 0, 0, 0.3);
     text-align: right;
+  }
+
+  @media only screen and (max-width: 400px) {
+    display: none;
   }
 `;
 
@@ -68,12 +78,32 @@ const Headline = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media only screen and (max-width: 400px) {
+    padding: 0px 20px;
+
+    span {
+      font-size: 15px;
+    }
+  }
 `;
 
 const Socials = styled.div`
-  width: 70px;
+  width: 100px;
   display: flex;
   justify-content: space-around;
+
+  @media only screen and (max-width: 400px) {
+    width: 120px;
+  }
+
+  .email {
+    display: none;
+
+    @media only screen and (max-width: 400px) {
+      display: inline-block;
+    }
+  }
 `;
 
 const SocialIcon = styled.img`
@@ -85,17 +115,29 @@ const Caption = styled.p`
   color: #a8a8a8;
   font-size: 14px;
   margin-bottom: 5px;
+
+  @media only screen and (max-width: 400px) {
+    padding: 0px 20px;
+    font-size: 13px;
+  }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
   height: max-content;
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SaiImage = styled.img`
   width: 850px;
   object-fit: contain;
+
+  @media only screen and (max-width: 400px) {
+    width: 400px;
+    /* object-fit: fill */
+  }
 `;
 
 const Title = styled.div`
@@ -105,11 +147,20 @@ const Title = styled.div`
   left: 0;
   position: relative;
 
+  @media only screen and (max-width: 400px) {
+    width: 100px;
+  }
+
   ::after {
     content: "Contact";
     position: absolute;
     left: 230px;
     bottom: -30px;
     font-size: 4em;
+
+    @media only screen and (max-width: 400px) {
+      left: 100px;
+      font-size: 3em;
+    }
   }
 `;
