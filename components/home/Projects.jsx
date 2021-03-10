@@ -6,8 +6,11 @@ export default function Projects() {
     <Container>
       <Title></Title>
       <ProjectsGrid>
-        {projects.map((project) => {
-          return <Project key={project.id} data={project}></Project>;
+        {projects.map((project, i) => {
+          let even = i % 2 === 0;
+          return (
+            <Project key={project.id} data={project} even={even}></Project>
+          );
         })}
       </ProjectsGrid>
     </Container>
@@ -17,14 +20,14 @@ export default function Projects() {
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  padding: 200px 0px;
+  padding: 100px 0px;
 `;
 
 const ProjectsGrid = styled.div`
   padding: 0px 100px;
 
   @media only screen and (max-width: 400px) {
-    padding: 0px 20px;
+    padding: 50px 20px;
   }
 `;
 
@@ -69,6 +72,5 @@ const projects = [
     imageURL: "/astronaut-ingravity.svg",
     webURL: "https://google.com",
     githubURL: "https://saihtun/outstagramm",
-    order: "true",
   },
 ];

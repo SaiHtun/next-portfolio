@@ -5,6 +5,7 @@ import gsap from "gsap";
 export default function Nav() {
   const logoRef = useRef();
   const menuRef = useRef([]);
+  const hamburgerRef = useRef();
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -15,6 +16,13 @@ export default function Nav() {
       delay: 4,
     });
     gsap.from(menuRef.current, {
+      opacity: 0,
+      yPercent: 100,
+      duration: 2,
+      stagger: 0.5,
+      delay: 4,
+    });
+    gsap.from(hamburgerRef.current, {
       opacity: 0,
       yPercent: 100,
       duration: 2,
@@ -45,7 +53,7 @@ export default function Nav() {
           );
         })}
       </Menu>
-      <HamWrapper onClick={() => setMenu(!menu)}>
+      <HamWrapper onClick={() => setMenu(!menu)} ref={hamburgerRef}>
         <Hamburger>
           <Close close={menu}>Close</Close>
           <LineClose close={menu}></LineClose>
@@ -59,7 +67,7 @@ export default function Nav() {
 const Close = styled.p`
   font-size: 12px;
   transform: translateY(100px);
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   position: absolute;
 
   ${(props) =>
@@ -131,7 +139,7 @@ const LineClose = styled.div`
   width: 100%;
   height: 2px;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
   ${(props) =>
     props.close &&

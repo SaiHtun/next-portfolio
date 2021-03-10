@@ -70,8 +70,6 @@ const MoreInfo = styled.div`
   position: relative;
   width: 100%;
   height: max-content;
-  display: grid;
-  justify-items: end;
 `;
 
 const Headline = styled.div`

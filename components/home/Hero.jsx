@@ -11,7 +11,6 @@ export default function Hero() {
   const btnRef = useRef();
   const heroRef = useRef();
   const reRef = useRef();
-  const projectRef = useRef();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -27,7 +26,7 @@ export default function Hero() {
     tl.to(textRef.current, {
       scrollTrigger: {
         trigger: btnRef.current,
-        start: "top 70%",
+        start: "top 75%",
         end: "bottom 25%",
         makers: true,
         scrub: true,
@@ -36,7 +35,7 @@ export default function Hero() {
       xPercent: -100,
       opacity: 0,
       duration: 4,
-      stagger: 0.6,
+      stagger: 1,
     });
 
     tl.to(btnRef.current, {
@@ -48,8 +47,8 @@ export default function Hero() {
         scrub: true,
       },
       yoyo: true,
-      yPercent: 200,
-      duration: 3,
+      yPercent: -500,
+      duration: 5,
     });
   }, []);
 
@@ -114,8 +113,11 @@ const HeroWrapper = styled.main`
   align-items: center;
   position: relative;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 950px) {
     padding-left: 100px;
+  }
+  @media only screen and (max-width: 800px) {
+    padding-left: 80px;
   }
   @media only screen and (max-width: 600px) {
     padding-left: 0px;
@@ -180,12 +182,6 @@ const LandingText = styled.div`
     min-height: max-content;
     overflow: hidden;
     z-index: 100;
-
-    @media only screen and (max-width: 380px) {
-      :first-child {
-        padding-left: 50px;
-      }
-    }
   }
 
   .text {
