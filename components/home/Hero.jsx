@@ -1,30 +1,96 @@
 import styled, { css } from "styled-components";
 import { HomeContext } from "../../contexts/HomeContextProvider";
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Hero() {
   const { btnResume, setBtnResume } = useContext(HomeContext);
+  const textRef = useRef([]);
+  const mainTextRef = useRef([]);
+  const btnRef = useRef();
+  const heroRef = useRef();
+  const reRef = useRef();
+  const projectRef = useRef();
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    let tl = gsap.timeline();
+    tl.from(textRef.current, { yPercent: 200, duration: 1.5, stagger: 0.25 });
+    tl.to(mainTextRef.current, {
+      color: "black",
+      duration: 1.5,
+      stagger: 0.25,
+    });
+    tl.from(reRef.current, { xPercent: 200, duration: 0.3 });
+    // tl.from(btnRef.current, { yPercent: 100, duration: 1.5, opacity: 0 });
+    tl.to(textRef.current, {
+      scrollTrigger: {
+        trigger: btnRef.current,
+        start: "top 70%",
+        end: "bottom 25%",
+        makers: true,
+        scrub: true,
+      },
+      yoyo: true,
+      xPercent: -100,
+      opacity: 0,
+      duration: 4,
+      stagger: 0.6,
+    });
+
+    tl.to(btnRef.current, {
+      scrollTrigger: {
+        trigger: btnRef.current,
+        start: "top 30%",
+        end: "bottom 30%",
+        makers: true,
+        scrub: true,
+      },
+      yoyo: true,
+      yPercent: 200,
+      duration: 3,
+    });
+  }, []);
+
+  const handleResuBtn = () => {
+    console.log("hello====>", btnResume);
+    setBtnResume(!btnResume);
+  };
 
   return (
     <>
-      <HeroWrapper>
-        <div>
+      <HeroWrapper ref={heroRef}>
+        <div style={{ width: "100%" }}>
           <LandingText>
             <div>
-              This is <span>Sai</span>
+              <p ref={(e) => (textRef.current[0] = e)} className="text">
+                {" "}
+                this is{" "}
+                <span ref={(e) => (mainTextRef.current[0] = e)}>Sai</span>
+              </p>
             </div>
             <div>
-              a <span>Designer</span>{" "}
+              <p ref={(e) => (textRef.current[1] = e)} className="text">
+                {" "}
+                a{" "}
+                <span ref={(e) => (mainTextRef.current[1] = e)}>Designer</span>
+              </p>
             </div>
             <div>
-              who can <span>Code.</span>
+              <p ref={(e) => (textRef.current[2] = e)} className="text">
+                {" "}
+                who can{" "}
+                <span ref={(e) => (mainTextRef.current[2] = e)}>Code.</span>
+              </p>
             </div>
           </LandingText>
-          <BtnWrapper className="btnResume">
+          <BtnWrapper slide={btnResume} ref={btnRef} className="btnResume">
             <Button
+              ref={reRef}
               className="btnResume"
               slide={btnResume}
-              onClick={() => setBtnResume(!btnResume)}
+              onClick={handleResuBtn}
             >
               <p>Resume</p>
             </Button>
@@ -38,13 +104,11 @@ export default function Hero() {
 
 const HeroWrapper = styled.main`
   width: 100vw;
-  max-width: 1250px;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  max-width: 1360px;
+  overflow: hidden;
   margin-left: 100px;
   padding-left: 140px;
-  height: 70vh;
-  /* background-color: #d3d3d3; */
+  height: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,13 +127,15 @@ const HeroWrapper = styled.main`
 `;
 
 const LandingText = styled.div`
+  width: 100%;
   font-size: 10em;
   line-height: 130px;
   color: #d3d3d3;
+  min-height: max-content;
   span {
     font-weight: bold;
     font-style: italic;
-    color: black;
+    color: #d3d3d3;
   }
 
   @media only screen and (max-width: 1180px) {
@@ -92,14 +158,38 @@ const LandingText = styled.div`
     line-height: 80px;
   }
   @media only screen and (max-width: 700px) {
-    font-size: 4.7em;
+    font-size: 4.8em;
     line-height: 80px;
   }
   @media only screen and (max-width: 400px) {
-    font-size: 4.5em;
-    line-height: 60px;
-    margin-left: 20px;
+    font-size: 4.7em;
+    line-height: 70px;
+    padding-left: 15px;
     margin-bottom: 15px;
+  }
+  @media only screen and (max-width: 370px) {
+    font-size: 4.6em;
+    line-height: 70px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+  }
+
+  div {
+    min-width: 400px;
+    width: 100%;
+    min-height: max-content;
+    overflow: hidden;
+    z-index: 100;
+
+    @media only screen and (max-width: 380px) {
+      :first-child {
+        padding-left: 50px;
+      }
+    }
+  }
+
+  .text {
+    padding-left: 10px;
   }
 `;
 
@@ -110,6 +200,7 @@ const ScrollDownArrow = styled.div`
   background-color: #d3d3d3;
   left: 100px;
   bottom: 20px;
+  z-index: -1;
 
   ::before {
     position: absolute;
@@ -142,23 +233,22 @@ const BtnWrapper = styled.div`
   position: relative;
   width: 130px;
   height: 50px;
-  background-color: #f3f3f3;
   margin: 20px;
+  overflow: hidden;
+  background-color: ${(props) => (props.slide ? "grey" : "black")};
 
   @media only screen and (max-width: 400px) {
-    width: 130px;
-    height: 40px;
     margin: 0 auto;
   }
 `;
 
 const Button = styled.div`
   position: absolute;
-  width: 100%;
+  width: 130px;
   height: 100%;
   background-color: black;
   padding: 10px 20px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -169,15 +259,24 @@ const Button = styled.div`
   p {
     pointer-events: none;
     color: white;
-    @media only screen and (max-width: 400px) {
-      font-size: 13px;
-      font-weight: 400;
+
+    ::before {
+      content: "";
+      position: absolute;
+      border: solid #d3d3d3;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      left: 20px;
+      bottom: 20px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
     }
   }
 
   ${(props) =>
     props.slide &&
     css`
-      transform: translateX(-60px);
-    `}
+      transform: translateX(-50px) !important;
+    `};
 `;

@@ -44,6 +44,7 @@ const Container = styled.div`
 
   @media only screen and (max-width: 400px) {
     padding-left: 0px;
+    grid-template-columns: 1fr;
   }
 `;
 
