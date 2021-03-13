@@ -20,3 +20,9 @@ export default function Home() {
     </Layout>
   );
 }
+
+//TODO 1. menu bar red
+//TODO 2. animate project ( sliding )
+//TODO 3. fix the gap for contact's name and caption
+//TODO 4. create project detail page and animate them
+//TODO 5. create blog page

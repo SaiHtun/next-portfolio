@@ -1,13 +1,40 @@
+import { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
+import gsap from "gsap";
+// import scrolltrigger;
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Project({ data, even }) {
+  const blackRef = useRef();
+  const imgRef = useRef();
+  const imgWrapperRef = useRef();
+  const infoRef = useRef();
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    let tl = gsap.timeline();
+    tl.to(blackRef.current, {
+      scrollTrigger: {
+        trigger: imgWrapperRef.current,
+        start: "top 80%",
+        end: "bottom 25%",
+        scrub: true,
+      },
+      ease: "Linear.easeInOut",
+      xPercent: 400,
+      duration: 1.5,
+      // ease: "Power4.easeInOut",
+    });
+  }, []);
+
   const { name, description, imageURL, webURL, githubURL } = data;
   return (
     <Container>
-      <ImageWrapper even={even}>
-        <ProjectImage source={imageURL}></ProjectImage>
+      <ImageWrapper ref={imgWrapperRef} even={even}>
+        <BlackBar ref={blackRef}></BlackBar>
+        <ProjectImage ref={imgRef} src={imageURL}></ProjectImage>
       </ImageWrapper>
-      <Info even={even}>
+      <Info ref={infoRef} even={even}>
         <NameWrapper>
           <p>{name}</p>
           <p className="description">{description}</p>
@@ -23,7 +50,7 @@ export default function Project({ data, even }) {
 
 const ProjectImage = styled.img`
   width: 100%;
-  height: 100%;
+  object-fit: contain;
 `;
 
 const Social = styled.img`
@@ -36,7 +63,7 @@ const Social = styled.img`
 const NameWrapper = styled.div``;
 
 const Container = styled.div`
-  min-width: 360px;
+  min-width: 365px;
   width: 100%;
   height: 400px;
   padding-top: 100px;
@@ -44,22 +71,34 @@ const Container = styled.div`
   grid-template-columns: repeat(2, 1fr);
 
   @media only screen and (max-width: 850px) {
-    padding-top: 30px;
+    /* padding-top: 0px; */
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 100px;
+    /* grid-template-rows: 1fr 100px; */
+  }
+  @media only screen and (max-width: 400px) {
+    max-width: 375px;
   }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  background-color: teal;
+  height: max-content;
   order: ${(props) => (props.even ? 2 : 1)};
   text-align: center;
+  position: relative;
+  overflow: hidden;
 
   @media only screen and (max-width: 850px) {
     order: 1;
   }
+`;
+
+const BlackBar = styled.div`
+  width: 600px;
+  height: 100%;
+  position: absolute;
+  background-color: black;
+  z-index: 10;
 `;
 
 const Info = styled.div`

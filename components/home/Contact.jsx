@@ -3,7 +3,13 @@ import styled from "styled-components";
 export default function Contact() {
   return (
     <>
-      <Title></Title>
+      <TitleWrapper>
+        <BlackBar></BlackBar>
+        <Title>
+          <div></div>
+          <p>Contact</p>
+        </Title>
+      </TitleWrapper>
       <Container>
         <Info>
           <p>Email</p>
@@ -139,27 +145,43 @@ const SaiImage = styled.img`
   }
 `;
 
-const Title = styled.div`
-  width: 200px;
-  height: 2px;
-  background-color: black;
-  left: 0;
+const TitleWrapper = styled.div`
+  width: max-content;
+  height: 80px;
+  overflow: hidden;
+  line-height: 80px;
+  text-align: center;
   position: relative;
+`;
 
-  @media only screen and (max-width: 400px) {
-    width: 100px;
+const BlackBar = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+`;
+
+const Title = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+
+  div {
+    height: 2px;
+    background-color: black;
+    display: grid;
+    align-self: center;
   }
 
-  ::after {
-    content: "Contact";
-    position: absolute;
-    left: 230px;
-    bottom: -30px;
+  p {
     font-size: 4em;
+  }
 
-    @media only screen and (max-width: 400px) {
-      left: 100px;
-      font-size: 3em;
+  @media only screen and (max-width: 500px) {
+    p {
+      font-size: 2.5em;
     }
   }
 `;

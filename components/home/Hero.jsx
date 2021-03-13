@@ -104,6 +104,7 @@ export default function Hero() {
 const HeroWrapper = styled.main`
   width: 100vw;
   max-width: 1360px;
+  min-height: 460px;
   overflow: hidden;
   margin-left: 100px;
   padding-left: 140px;

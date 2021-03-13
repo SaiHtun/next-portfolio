@@ -1,11 +1,65 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Project from "./Project";
+import gsap from "gsap";
+//import scrolltrigger
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Projects() {
+  const barRef = useRef();
+  const titleRef = useRef();
+  const titleWrapperRef = useRef();
+  const projectRef = useRef();
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    let tl = gsap.timeline();
+
+    tl.to(barRef.current, {
+      scrollTrigger: {
+        trigger: barRef.current,
+        start: "top 75%",
+        end: "bottom 25%",
+        scrub: true,
+      },
+      xPercent: -300,
+      duration: 1.5,
+    });
+    // tl.from(titleRef.current, {
+    //   scrollTrigger: {
+    //     trigger: titleRef.current,
+    //     start: "top 75%",
+    //     end: "bottom 25%",
+    //     toggleActions: "play none reverse none",
+    //   },
+    //   xPercent: -300,
+    //   duration: 1.5,
+    // });
+    // tl.to(
+    //   barRef.current,
+    //   {
+    //     scrollTrigger: {
+    //       trigger: projectRef.current,
+    //       start: "top 60%",
+    //       end: "bottom 25%",
+    //     },
+    //     xPercent: 500,
+    //     duration: 1.5,
+    //   },
+    //   "+=3"
+    // );
+  }, []);
+
   return (
     <Container>
-      <Title></Title>
-      <ProjectsGrid>
+      <TitleWrapper ref={titleWrapperRef}>
+        <BlackBar ref={barRef}></BlackBar>
+        <Title ref={titleRef}>
+          <div></div>
+          <p>Projects</p>
+        </Title>
+      </TitleWrapper>
+      <ProjectsGrid ref={projectRef}>
         {projects.map((project, i) => {
           let even = i % 2 === 0;
           return (
@@ -24,34 +78,61 @@ const Container = styled.div`
 `;
 
 const ProjectsGrid = styled.div`
+  width: 100%;
   padding: 0px 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
 
+  @media only screen and (max-width: 500px) {
+    padding: 50px 5px;
+  }
   @media only screen and (max-width: 400px) {
-    padding: 50px 20px;
+    padding: 50px 5px;
   }
 `;
 
-const Title = styled.div`
-  width: 200px;
-  height: 2px;
-  background-color: black;
-  left: 0;
+const TitleWrapper = styled.div`
+  width: max-content;
+  height: 80px;
+  overflow: hidden;
+  line-height: 80px;
+  text-align: center;
   position: relative;
+`;
 
-  @media only screen and (max-width: 400px) {
-    width: 100px;
+const BlackBar = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: black;
+`;
+
+const Title = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+
+  div {
+    height: 2px;
+    background-color: black;
+    display: grid;
+    align-self: center;
+    z-index: 1;
   }
 
-  ::after {
-    content: "Projects";
-    position: absolute;
-    left: 230px;
-    bottom: -30px;
+  p {
     font-size: 4em;
+  }
 
-    @media only screen and (max-width: 400px) {
-      left: 100px;
-      font-size: 3em;
+  @media only screen and (max-width: 500px) {
+    p {
+      font-size: 2.5em;
     }
   }
 `;
@@ -61,7 +142,7 @@ const projects = [
     id: 1,
     name: "Outstagramm",
     description: "social media",
-    imageURL: "/astronaut-ingravity.svg",
+    imageURL: "/outstagramm.png",
     webURL: "https://google.com",
     githubURL: "https://saihtun/outstagramm",
   },
@@ -69,7 +150,7 @@ const projects = [
     id: 2,
     name: "Telemartmyanmar",
     description: "E-Commerce",
-    imageURL: "/astronaut-ingravity.svg",
+    imageURL: "/telemart.png",
     webURL: "https://google.com",
     githubURL: "https://saihtun/outstagramm",
   },
