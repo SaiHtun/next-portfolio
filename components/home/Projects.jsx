@@ -15,45 +15,22 @@ export default function Projects() {
     gsap.registerPlugin(ScrollTrigger);
     let tl = gsap.timeline();
 
-    tl.to(barRef.current, {
+    tl.from(titleRef.current, {
       scrollTrigger: {
-        trigger: barRef.current,
+        trigger: titleRef.current,
         start: "top 75%",
         end: "bottom 25%",
         scrub: true,
+        toggleActions: "play none reverse none",
       },
       xPercent: -300,
       duration: 1.5,
     });
-    // tl.from(titleRef.current, {
-    //   scrollTrigger: {
-    //     trigger: titleRef.current,
-    //     start: "top 75%",
-    //     end: "bottom 25%",
-    //     toggleActions: "play none reverse none",
-    //   },
-    //   xPercent: -300,
-    //   duration: 1.5,
-    // });
-    // tl.to(
-    //   barRef.current,
-    //   {
-    //     scrollTrigger: {
-    //       trigger: projectRef.current,
-    //       start: "top 60%",
-    //       end: "bottom 25%",
-    //     },
-    //     xPercent: 500,
-    //     duration: 1.5,
-    //   },
-    //   "+=3"
-    // );
   }, []);
 
   return (
     <Container>
       <TitleWrapper ref={titleWrapperRef}>
-        <BlackBar ref={barRef}></BlackBar>
         <Title ref={titleRef}>
           <div></div>
           <p>Projects</p>

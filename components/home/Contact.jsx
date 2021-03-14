@@ -1,18 +1,52 @@
 import styled from "styled-components";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Contact() {
+  const titleRef = useRef();
+  const whiteRef = useRef();
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    // let tl = gsap.timeline();
+    gsap.from(titleRef.current, {
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: "top bottom",
+        end: "bottom 25%",
+        scrub: true,
+        toggleActions: "play none reverse none",
+      },
+      xPercent: -300,
+      duration: 1.5,
+    });
+    gsap.to(whiteRef.current, {
+      scrollTrigger: {
+        trigger: whiteRef.current,
+        start: "top 75%",
+        end: "bottom 25%",
+        scrub: true,
+        toggleActions: "play none reverse none",
+      },
+      xPercent: 400,
+      duration: 2,
+    });
+  }, []);
+
   return (
     <>
       <TitleWrapper>
-        <BlackBar></BlackBar>
-        <Title>
+        <Title ref={titleRef}>
           <div></div>
           <p>Contact</p>
         </Title>
       </TitleWrapper>
       <Container>
         <Info>
-          <p>Email</p>
+          {/* <p>Email</p> */}
+          <div></div>
           <p>Designed and Developed by Sai</p>
         </Info>
         <MoreInfo>
@@ -20,14 +54,15 @@ export default function Contact() {
             <Headline>
               <span>Sai Htun 谷忠信</span>
               <Socials>
-                <SocialIcon src="/facebook.svg"></SocialIcon>
-                <SocialIcon src="/github.svg"></SocialIcon>
-                <SocialIcon src="/twitter.svg"></SocialIcon>
-                <SocialIcon className="email" src="/gmail.svg"></SocialIcon>
+                <Link href="#">Facebook</Link>
+                <Link href="#">Twitter</Link>
+                <Link href="#">Github</Link>
+                <Link href="#">Email</Link>
               </Socials>
             </Headline>
-            <Caption>This awesome developer is located at SF Bay Area.</Caption>
+            {/* <Caption>This awesome developer is located at SF Bay Area.</Caption> */}
             <ImageWrapper>
+              <WhiteBar ref={whiteRef}></WhiteBar>
               <SaiImage src="/saisai.jpg"></SaiImage>
             </ImageWrapper>
           </div>
@@ -36,6 +71,13 @@ export default function Contact() {
     </>
   );
 }
+
+const WhiteBar = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+`;
 
 const Container = styled.div`
   width: 100vw;
@@ -98,6 +140,30 @@ const Socials = styled.div`
   display: flex;
   justify-content: space-around;
 
+  a {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 3px;
+    position: relative;
+
+    ::after {
+      content: "";
+      position: absolute;
+      width: 0px;
+      height: 2px;
+      left: 0;
+      bottom: -3px;
+      background-color: black;
+      transition: all 0.3s ease-in-out;
+    }
+
+    :hover {
+      ::after {
+        width: 100%;
+      }
+    }
+  }
+
   @media only screen and (max-width: 400px) {
     width: 120px;
   }
@@ -131,8 +197,9 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: max-content;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  position: relative;
 `;
 
 const SaiImage = styled.img`
@@ -148,17 +215,11 @@ const SaiImage = styled.img`
 const TitleWrapper = styled.div`
   width: max-content;
   height: 80px;
+  margin-top: 100px;
   overflow: hidden;
   line-height: 80px;
   text-align: center;
   position: relative;
-`;
-
-const BlackBar = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: black;
 `;
 
 const Title = styled.div`

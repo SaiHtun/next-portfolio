@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import styled, { css } from "styled-components";
 import gsap from "gsap";
 // import scrolltrigger;
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Project({ data, even }) {
-  const blackRef = useRef();
+  const whiteRef = useRef();
   const imgRef = useRef();
   const imgWrapperRef = useRef();
   const infoRef = useRef();
@@ -13,17 +14,16 @@ export default function Project({ data, even }) {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     let tl = gsap.timeline();
-    tl.to(blackRef.current, {
+    tl.to(whiteRef.current, {
       scrollTrigger: {
-        trigger: imgWrapperRef.current,
-        start: "top 80%",
+        trigger: imgRef.current,
+        start: "top 75%",
         end: "bottom 25%",
         scrub: true,
       },
       ease: "Linear.easeInOut",
-      xPercent: 400,
+      xPercent: 300,
       duration: 1.5,
-      // ease: "Power4.easeInOut",
     });
   }, []);
 
@@ -31,7 +31,7 @@ export default function Project({ data, even }) {
   return (
     <Container>
       <ImageWrapper ref={imgWrapperRef} even={even}>
-        <BlackBar ref={blackRef}></BlackBar>
+        <WhiteBar ref={whiteRef}></WhiteBar>
         <ProjectImage ref={imgRef} src={imageURL}></ProjectImage>
       </ImageWrapper>
       <Info ref={infoRef} even={even}>
@@ -40,8 +40,8 @@ export default function Project({ data, even }) {
           <p className="description">{description}</p>
         </NameWrapper>
         <SocialWrapper even={even}>
-          <Social src="/github.svg"></Social>
-          <Social src="/world.svg"></Social>
+          <Link href="#">Github</Link>
+          <Link href="#">Website</Link>
         </SocialWrapper>
       </Info>
     </Container>
@@ -93,11 +93,11 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const BlackBar = styled.div`
-  width: 600px;
+const WhiteBar = styled.div`
+  width: 100%;
   height: 100%;
   position: absolute;
-  background-color: black;
+  background-color: white;
   z-index: 10;
 `;
 
@@ -125,6 +125,33 @@ const SocialWrapper = styled.div`
   padding-top: 20px;
   display: flex;
   justify-content: ${(props) => (props.even ? "flex-start" : "flex-end")};
+
+  a {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    position: relative;
+
+    :first-child {
+      margin-right: 3px;
+    }
+
+    ::after {
+      content: "";
+      position: absolute;
+      width: 0px;
+      height: 2px;
+      left: 0;
+      bottom: -3px;
+      background-color: black;
+      transition: all 0.3s ease-in-out;
+    }
+
+    :hover {
+      ::after {
+        width: 100%;
+      }
+    }
+  }
 
   ${(props) =>
     props.even &&

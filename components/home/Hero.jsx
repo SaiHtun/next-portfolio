@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Hero() {
-  const { btnResume, setBtnResume } = useContext(HomeContext);
+  const { btnResume, setBtnResume, menu } = useContext(HomeContext);
   const textRef = useRef([]);
   const mainTextRef = useRef([]);
   const btnRef = useRef();
