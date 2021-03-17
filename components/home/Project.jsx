@@ -36,11 +36,13 @@ export default function Project({ data, even }) {
 
   const { name, description, imageURL, webURL, githubURL } = data;
   return (
-    <Container onClick={() => handleClick(name)}>
-      <Overlay>
+    <Container>
+      <ImageWrapper
+        onClick={() => handleClick(name)}
+        ref={imgWrapperRef}
+        even={even}
+      >
         <View>View Detail</View>
-      </Overlay>
-      <ImageWrapper ref={imgWrapperRef} even={even}>
         <WhiteBar ref={whiteRef}></WhiteBar>
         <ProjectImage ref={imgRef} src={imageURL}></ProjectImage>
       </ImageWrapper>
@@ -50,8 +52,12 @@ export default function Project({ data, even }) {
           <p className="description">{description}</p>
         </NameWrapper>
         <SocialWrapper even={even}>
-          <Link href="#">Github</Link>
-          <Link href="#">Website</Link>
+          <Link href={githubURL}>
+            <a target="_blank">Github</a>
+          </Link>
+          <Link href={webURL}>
+            <a target="_blank">Website</a>
+          </Link>
         </SocialWrapper>
       </Info>
     </Container>
@@ -61,60 +67,26 @@ export default function Project({ data, even }) {
 const ProjectImage = styled.img`
   width: 100%;
   object-fit: contain;
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  z-index: 1;
+  transition: all 0.5s ease-in;
 
   :hover {
-    p {
-      transform: translateY(0px);
-      opacity: 1;
-
-      ::before {
-        width: 100px;
-      }
-
-      ::after {
-        width: 100px;
-      }
-    }
+    filter: blur(4px);
   }
 `;
 
 const View = styled.p`
-  position: relative;
-  transform: translateY(50px);
+  position: absolute;
   opacity: 0;
+  transform: translateY(50px);
   transition: all 0.5s ease-in-out;
   z-index: 2;
-  top: 50px;
+  top: 170px;
+  left: 230px;
+  z-index: 10;
+  font-size: 30px;
 
-  ::before {
-    content: "";
-    position: absolute;
-    left: -110px;
-    bottom: 8px;
-    width: 0px;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: all 0.5s ease-in-out;
-  }
-  ::after {
-    content: "";
-    position: absolute;
-    left: 90px;
-    bottom: 8px;
-    width: 0px;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: all 0.5s ease-in-out;
+  @media only screen and (max-width: 400px) {
+    display: none;
   }
 `;
 
@@ -128,12 +100,15 @@ const Container = styled.div`
   padding-top: 100px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  cursor: pointer;
 
   @media only screen and (max-width: 850px) {
     /* padding-top: 0px; */
     grid-template-columns: 1fr;
-    /* grid-template-rows: 1fr 100px; */
+  }
+  @media only screen and (max-width: 500px) {
+    padding-top: 0px;
+    grid-template-rows: 230px 50px;
+    height: 350px;
   }
   @media only screen and (max-width: 400px) {
     max-width: 375px;
@@ -147,9 +122,17 @@ const ImageWrapper = styled.div`
   text-align: center;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
   @media only screen and (max-width: 850px) {
     order: 1;
+  }
+
+  :hover {
+    p {
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
 `;
 
@@ -164,6 +147,7 @@ const WhiteBar = styled.div`
 const Info = styled.div`
   text-align: ${(props) => (props.even ? "left" : "right")};
   order: ${(props) => (props.even ? 1 : 2)};
+  z-index: 10;
 
   .description {
     font-size: 14px;

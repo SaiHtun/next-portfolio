@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Nav from "../../components/Nav";
 import Link from "next/link";
 import gsap from "gsap";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import MainLayout from "../../components/layouts/index";
+import { HomeContext } from "../../contexts/HomeContextProvider";
 
 export default function Outstagramm() {
   const imgRef = useRef();
   const textRef = useRef();
+  const { menu } = useContext(HomeContext);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -22,7 +24,7 @@ export default function Outstagramm() {
     tl.from(
       textRef.current,
       {
-        yPercent: 1000,
+        yPercent: 50,
         opacity: 0,
         duration: 1,
       },
@@ -33,7 +35,7 @@ export default function Outstagramm() {
   return (
     <MainLayout>
       <Nav></Nav>
-      <Container>
+      <Container menu={menu}>
         <ProjectImg ref={imgRef} src="/outstagramm.png"></ProjectImg>
         <Info ref={textRef}>
           <Left>
@@ -121,6 +123,10 @@ const Stacks = styled.ul`
     display: flex;
     gap: 10px;
   }
+  @media only screen and (max-width: 500px) {
+    display: flex;
+    gap: 30px;
+  }
 `;
 
 const Info = styled.div`
@@ -175,6 +181,9 @@ const Links = styled.div`
     flex-direction: row;
     gap: 10px;
   }
+  @media only screen and (max-width: 500px) {
+    gap: 30px;
+  }
 `;
 
 const Description = styled.div`
@@ -184,7 +193,7 @@ const Description = styled.div`
   font-size: 16px;
   font-weight: 250;
   line-height: 20px;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.8);
 `;
 
 const Container = styled.main`
@@ -192,6 +201,15 @@ const Container = styled.main`
   min-height: 100vh;
   padding: 0px 100px;
   height: max-content;
+  z-index: -2;
+
+  ${(props) =>
+    props.menu &&
+    css`
+      min-height: 0px;
+      max-height: 80vh;
+      overflow-y: hidden;
+    `}
 
   @media only screen and (max-width: 800px) {
     padding: 0px 50px;

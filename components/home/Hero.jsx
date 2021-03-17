@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { HomeContext } from "../../contexts/HomeContextProvider";
 import { useContext, useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -26,9 +27,8 @@ export default function Hero() {
     tl.to(textRef.current, {
       scrollTrigger: {
         trigger: btnRef.current,
-        start: "top 75%",
+        start: "top 60%",
         end: "bottom 25%",
-        makers: true,
         scrub: true,
       },
       yoyo: true,
@@ -43,12 +43,11 @@ export default function Hero() {
         trigger: btnRef.current,
         start: "top 30%",
         end: "bottom 30%",
-        makers: true,
         scrub: true,
       },
       yoyo: true,
       yPercent: -500,
-      duration: 5,
+      duration: 1.2,
     });
   }, []);
 
@@ -119,6 +118,9 @@ export default function Hero() {
             >
               <p>Resume</p>
             </Button>
+            <Link href="/sai.pdf" download>
+              <File src="/file.svg" alt="file" />
+            </Link>
           </BtnWrapper>
         </div>
         <ScrollDownArrow up={up} onClick={() => goTop()}>
@@ -129,10 +131,17 @@ export default function Hero() {
   );
 }
 
+const File = styled.img`
+  width: 20px;
+  object-fit: contain;
+  margin-right: 15px;
+  cursor: pointer;
+`;
+
 const HeroWrapper = styled.main`
   width: 100vw;
   max-width: 1360px;
-  min-height: 460px;
+  min-height: 500px;
   overflow: hidden;
   margin-left: 100px;
   padding-left: 140px;
@@ -196,7 +205,7 @@ const LandingText = styled.div`
     font-size: 4.7em;
     line-height: 70px;
     padding-left: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
   }
   @media only screen and (max-width: 370px) {
     font-size: 4.6em;
@@ -238,7 +247,10 @@ const BtnWrapper = styled.div`
   height: 50px;
   margin: 20px;
   overflow: hidden;
-  background-color: ${(props) => (props.slide ? "grey" : "black")};
+  background-color: ${(props) => (props.slide ? "#7FFFD4" : "black")};
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
   @media only screen and (max-width: 400px) {
     margin: 0 auto;

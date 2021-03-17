@@ -52,6 +52,10 @@ const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   padding: 100px 0px;
+
+  @media only screen and (max-width: 500px) {
+    padding: 50px 0px;
+  }
 `;
 
 const ProjectsGrid = styled.div`
@@ -63,10 +67,7 @@ const ProjectsGrid = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 500px) {
-    padding: 50px 5px;
-  }
-  @media only screen and (max-width: 400px) {
-    padding: 50px 5px;
+    padding: 50px 5px 0px 5px;
   }
 `;
 
@@ -120,15 +121,15 @@ const projects = [
     name: "Outstagramm",
     description: "social media",
     imageURL: "/outstagramm.png",
-    webURL: "https://google.com",
-    githubURL: "https://saihtun/outstagramm",
+    webURL: "https://outstagramm-2bbb5.web.app",
+    githubURL: "https://github.com/SaiHtun/outstagramm",
   },
   {
     id: 2,
     name: "Telemartmyanmar",
     description: "E-Commerce",
     imageURL: "/telemart.png",
-    webURL: "https://google.com",
-    githubURL: "https://saihtun/outstagramm",
+    webURL: "https://telemartmyanmar.com",
+    githubURL: "https://github.com/SaiHtun/telemartmyanmar",
   },
 ];

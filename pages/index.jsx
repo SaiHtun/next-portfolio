@@ -76,7 +76,7 @@ const Container = styled.main`
   ${(props) =>
     props.menu &&
     css`
-      max-height: 60vh;
+      max-height: 80vh;
       overflow-y: hidden;
     `};
 `;

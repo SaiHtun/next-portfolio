@@ -64,34 +64,69 @@ export default function Nav() {
       </Container>
       <MenuOverlay overlayRef open={menu}>
         <Info>
-          <li onClick={() => setMenu(false)}>
-            <Link href="/">Profile </Link>
-          </li>
-          <li onClick={() => setMenu(false)}>
-            <Link href="/blog">Blog </Link>
-          </li>
+          <div>
+            <li onClick={() => setMenu(false)}>
+              <Link href="/">Profile </Link>
+            </li>
+            <li onClick={() => setMenu(false)}>
+              <Link href="/blog">Blog </Link>
+            </li>
+          </div>
         </Info>
         <Socials>
-          <Link href="#">Facebook </Link>
-          <Link href="#">Github </Link>
-          <Link href="#">Email </Link>
+          <Link href="https://www.facebook.com/">
+            <a target="_blank">Facebook</a>
+          </Link>
+          <Link href="https://twitter.com/SaiHtun19428970">
+            <a target="_blank">Twitter</a>
+          </Link>
+          <Link href="https://github.com/SaiHtun">
+            <a target="_blank">Github</a>
+          </Link>
+          <a href="mailto: saihtun1430@gmail.com">Email</a>
         </Socials>
       </MenuOverlay>
     </>
   );
 }
 
+const Container = styled.nav`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 60px 100px;
+  z-index: 10;
+  background-color: white;
+
+  @media only screen and (max-width: 1000px) {
+    padding: 50px 60px;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 50px 50px;
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 20px;
+  }
+
+  ${(props) =>
+    props.open &&
+    css`
+      overflow: hidden;
+    `}
+`;
+
 const MenuOverlay = styled.div`
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   position: absolute;
   background-color: white;
-  transform: translateY(-800px);
+  transform: translateX(-1500px);
   transition: all 0.6s ease-in-out;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  z-index: 2;
+  justify-content: flex-start;
+  z-index: 1;
 
   @media only screen and (max-width: 800px) {
     /* padding-left: 50px; */
@@ -104,22 +139,25 @@ const MenuOverlay = styled.div`
   ${(props) =>
     props.open &&
     css`
-      transform: translateY(0px);
+      transform: translateX(0px);
       position: fixed;
     `}
 `;
 
 const Info = styled.ul`
   width: 100%;
-  min-height: 300px;
+  min-height: 400px;
   height: max-content;
   color: black;
   list-style: none;
-  z-index: 100;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   font-size: 3em;
   padding: 60px;
+  display: grid;
+  justify-items: left;
+  align-items: center;
 
   @media only screen and (max-width: 600px) {
     padding: 20px;
@@ -169,31 +207,6 @@ const Close = styled.p`
     props.close &&
     css`
       transform: translateY(-5px);
-    `}
-`;
-
-const Container = styled.nav`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 60px 100px;
-  z-index: 100;
-
-  @media only screen and (max-width: 1000px) {
-    padding: 50px 60px;
-  }
-  @media only screen and (max-width: 600px) {
-    padding: 50px 50px;
-  }
-  @media only screen and (max-width: 400px) {
-    padding: 50px 20px;
-  }
-
-  ${(props) =>
-    props.open &&
-    css`
-      overflow: hidden;
     `}
 `;
 

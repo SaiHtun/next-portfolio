@@ -1,13 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Nav from "../../components/Nav";
 import Link from "next/link";
 import gsap from "gsap";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import MainLayout from "../../components/layouts/index";
+// import context
+import { HomeContext } from "../../contexts/HomeContextProvider";
 
 export default function Outstagramm() {
   const imgRef = useRef();
   const textRef = useRef();
+  const { menu } = useContext(HomeContext);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -33,7 +36,7 @@ export default function Outstagramm() {
   return (
     <MainLayout>
       <Nav></Nav>
-      <Container>
+      <Container menu={menu}>
         <ProjectImg ref={imgRef} src="/telemart.png"></ProjectImg>
         <Info ref={textRef}>
           <Left>
@@ -194,6 +197,14 @@ const Container = styled.main`
   min-height: 100vh;
   padding: 0px 100px;
   height: max-content;
+
+  ${(props) =>
+    props.menu &&
+    css`
+      min-height: 0px;
+      max-height: 80vh;
+      overflow-y: hidden;
+    `}
 
   @media only screen and (max-width: 800px) {
     padding: 0px 50px;
