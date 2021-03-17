@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 export default function Contact() {
   const titleRef = useRef();
   const whiteRef = useRef();
+  const imgRef = useRef();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -44,33 +45,50 @@ export default function Contact() {
         </Title>
       </TitleWrapper>
       <Container>
-        <Info>
-          {/* <p>Email</p> */}
-          <div></div>
-          <p>Designed and Developed by Sai</p>
-        </Info>
-        <MoreInfo>
-          <div>
-            <Headline>
-              <span>Sai Htun 谷忠信</span>
-              <Socials>
-                <Link href="#">Facebook</Link>
-                <Link href="#">Twitter</Link>
-                <Link href="#">Github</Link>
-                <Link href="#">Email</Link>
-              </Socials>
-            </Headline>
-            {/* <Caption>This awesome developer is located at SF Bay Area.</Caption> */}
-            <ImageWrapper>
-              <WhiteBar ref={whiteRef}></WhiteBar>
-              <SaiImage src="/saisai.jpg"></SaiImage>
-            </ImageWrapper>
-          </div>
-        </MoreInfo>
+        <Wrapper>
+          <Headline>
+            <span>Sai Htun 谷忠信</span>
+            <Socials>
+              <Link href="#">Facebook</Link>
+              <Link href="#">Twitter</Link>
+              <Link href="#">Github</Link>
+              <Link href="#">Email</Link>
+            </Socials>
+          </Headline>
+          <Caption>This awesome developer is located at SF Bay Area.</Caption>
+        </Wrapper>
+        <ImageWrapper ref={imgRef}>
+          <WhiteBar ref={whiteRef}></WhiteBar>
+          <SaiImage src="/saisai.jpg"></SaiImage>
+        </ImageWrapper>
       </Container>
+      <Footer>
+        <p>
+          Designed and Developed by <span>Sai</span>
+        </p>
+      </Footer>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  @media only screen and (max-width: 500px) {
+    justify-self: flex-start;
+    align-self: flex-end;
+  }
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  margin-top: -50px;
+
+  span {
+    font-family: "Sacramento", cursive;
+  }
+`;
 
 const WhiteBar = styled.div`
   width: 100%;
@@ -83,52 +101,27 @@ const Container = styled.div`
   width: 100vw;
   max-width: 1360px;
   overflow: hidden;
+  min-height: 500px;
   height: max-content;
-  margin-top: -50px;
-  padding-left: 100px;
-  padding-top: 150px;
+  padding: 100px 0px 0px 100px;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 
-  @media only screen and (max-width: 400px) {
-    padding-left: 0px;
-    grid-template-columns: 1fr;
+  @media only screen and (max-width: 500px) {
+    padding: 0px 20px;
   }
-`;
-
-const Info = styled.div`
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  p:nth-last-child(1) {
-    color: rgba(0, 0, 0, 0.3);
-    text-align: right;
-  }
-
-  @media only screen and (max-width: 400px) {
-    display: none;
-  }
-`;
-
-const MoreInfo = styled.div`
-  position: relative;
-  width: 100%;
-  height: max-content;
 `;
 
 const Headline = styled.div`
-  width: 320px;
+  width: 400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 100px;
 
-  @media only screen and (max-width: 400px) {
-    padding: 0px 20px;
-
+  @media only screen and (max-width: 500px) {
+    padding: 0px;
+    width: 350px;
     span {
       font-size: 15px;
     }
@@ -165,31 +158,20 @@ const Socials = styled.div`
   }
 
   @media only screen and (max-width: 400px) {
-    width: 120px;
+    width: max-content;
   }
-
-  .email {
-    display: none;
-
-    @media only screen and (max-width: 400px) {
-      display: inline-block;
-    }
-  }
-`;
-
-const SocialIcon = styled.img`
-  width: 25px;
-  object-fit: contain;
 `;
 
 const Caption = styled.p`
   color: #a8a8a8;
   font-size: 14px;
+  font-weight: 200;
   margin-bottom: 5px;
+  padding-left: 100px;
 
   @media only screen and (max-width: 400px) {
-    padding: 0px 20px;
     font-size: 13px;
+    padding-left: 0px;
   }
 `;
 
@@ -197,19 +179,18 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: max-content;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
+
+  @media only screen and (max-width: 840px) {
+    justify-content: center;
+  }
 `;
 
 const SaiImage = styled.img`
-  width: 850px;
+  height: 300px;
   object-fit: contain;
-
-  @media only screen and (max-width: 400px) {
-    width: 400px;
-    /* object-fit: fill */
-  }
 `;
 
 const TitleWrapper = styled.div`

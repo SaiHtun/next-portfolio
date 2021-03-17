@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { HomeContext } from "../../contexts/HomeContextProvider";
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -11,6 +11,7 @@ export default function Hero() {
   const btnRef = useRef();
   const heroRef = useRef();
   const reRef = useRef();
+  const [up, setUp] = useState(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +23,6 @@ export default function Hero() {
       stagger: 0.25,
     });
     tl.from(reRef.current, { xPercent: 200, duration: 0.3 });
-    // tl.from(btnRef.current, { yPercent: 100, duration: 1.5, opacity: 0 });
     tl.to(textRef.current, {
       scrollTrigger: {
         trigger: btnRef.current,
@@ -52,9 +52,35 @@ export default function Hero() {
     });
   }, []);
 
+  const handleScroll = () => {
+    if (window.scrollY >= window.innerHeight + 600) {
+      setUp(true);
+    } else {
+      setUp(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleResuBtn = () => {
     console.log("hello====>", btnResume);
     setBtnResume(!btnResume);
+  };
+
+  const upOrDown = !up ? (
+    <span></span>
+  ) : (
+    <span style={{ fontSize: "15px" }}>Go Top</span>
+  );
+
+  const goTop = () => {
+    if (up) {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
@@ -95,7 +121,9 @@ export default function Hero() {
             </Button>
           </BtnWrapper>
         </div>
-        <ScrollDownArrow></ScrollDownArrow>
+        <ScrollDownArrow up={up} onClick={() => goTop()}>
+          {upOrDown}
+        </ScrollDownArrow>
       </HeroWrapper>
     </>
   );
@@ -192,33 +220,11 @@ const LandingText = styled.div`
 
 const ScrollDownArrow = styled.div`
   position: fixed;
-  width: 2px;
-  height: 80px;
-  background-color: #d3d3d3;
+  display: grid;
+  justify-items: center;
   left: 100px;
-  bottom: 20px;
-  z-index: -1;
-
-  ::before {
-    position: absolute;
-    content: "Scroll";
-    font-size: 13px;
-    top: -20px;
-    left: -15px;
-  }
-
-  ::after {
-    content: "";
-    position: absolute;
-    border: solid #d3d3d3;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    left: -3px;
-    bottom: 0;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
+  bottom: 60px;
+  cursor: pointer;
 
   @media only screen and (max-width: 400px) {
     left: 30px;

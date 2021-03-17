@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import gsap from "gsap";
 // import scrolltrigger;
@@ -10,6 +11,7 @@ export default function Project({ data, even }) {
   const imgRef = useRef();
   const imgWrapperRef = useRef();
   const infoRef = useRef();
+  const router = useRouter();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -27,9 +29,17 @@ export default function Project({ data, even }) {
     });
   }, []);
 
+  const handleClick = (name) => {
+    name = name.toLowerCase();
+    router.push(`/projects/${name}`);
+  };
+
   const { name, description, imageURL, webURL, githubURL } = data;
   return (
-    <Container>
+    <Container onClick={() => handleClick(name)}>
+      <Overlay>
+        <View>View Detail</View>
+      </Overlay>
       <ImageWrapper ref={imgWrapperRef} even={even}>
         <WhiteBar ref={whiteRef}></WhiteBar>
         <ProjectImage ref={imgRef} src={imageURL}></ProjectImage>
@@ -53,22 +63,72 @@ const ProjectImage = styled.img`
   object-fit: contain;
 `;
 
-const Social = styled.img`
-  width: 25px;
-  height: 25px;
-  object-fit: contain;
-  margin: 2px;
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  z-index: 1;
+
+  :hover {
+    p {
+      transform: translateY(0px);
+      opacity: 1;
+
+      ::before {
+        width: 100px;
+      }
+
+      ::after {
+        width: 100px;
+      }
+    }
+  }
+`;
+
+const View = styled.p`
+  position: relative;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+  top: 50px;
+
+  ::before {
+    content: "";
+    position: absolute;
+    left: -110px;
+    bottom: 8px;
+    width: 0px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.5s ease-in-out;
+  }
+  ::after {
+    content: "";
+    position: absolute;
+    left: 90px;
+    bottom: 8px;
+    width: 0px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.5s ease-in-out;
+  }
 `;
 
 const NameWrapper = styled.div``;
 
 const Container = styled.div`
+  position: relative;
   min-width: 365px;
   width: 100%;
   height: 400px;
   padding-top: 100px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  cursor: pointer;
 
   @media only screen and (max-width: 850px) {
     /* padding-top: 0px; */
@@ -128,11 +188,11 @@ const SocialWrapper = styled.div`
 
   a {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.8);
     position: relative;
 
     :first-child {
-      margin-right: 3px;
+      margin-right: 10px;
     }
 
     ::after {

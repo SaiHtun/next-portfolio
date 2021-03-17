@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
 import styled, { css } from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import gsap from "gsap";
 // context api
 import { HomeContext } from "../contexts/HomeContextProvider";
@@ -9,42 +10,46 @@ export default function Nav() {
   const logoRef = useRef();
   const menuRef = useRef([]);
   const hamburgerRef = useRef();
-  const overlayRef = useRef();
-  // const [menu, setMenu] = useState(false);
   const { menu, setMenu } = useContext(HomeContext);
+  const router = useRouter();
 
   useEffect(() => {
     gsap.from(logoRef.current, {
       opacity: 0,
       yPercent: 100,
       duration: 2,
-      delay: 4,
     });
     gsap.from(menuRef.current, {
       opacity: 0,
       yPercent: 100,
       duration: 2,
       stagger: 0.5,
-      delay: 4,
     });
     gsap.from(hamburgerRef.current, {
       opacity: 0,
       yPercent: 100,
       duration: 2,
       stagger: 0.5,
-      delay: 4,
     });
   }, []);
 
   return (
     <>
       <Container open={menu}>
-        <Logo src="/astronaut-ingravity.svg" ref={logoRef}></Logo>
+        <Logo
+          onClick={() => router.push("/")}
+          src="/astronaut-ingravity.svg"
+          ref={logoRef}
+        ></Logo>
         <Menu>
           {["Profile", "Blog"].map((li, i) => {
             return (
               <li key={i} ref={(e) => (menuRef.current[i] = e)}>
-                {li}
+                {li === "Profile" ? (
+                  <Link href={`/`}>{li}</Link>
+                ) : (
+                  <Link href={`/${li.toLowerCase()}`}>{li}</Link>
+                )}
               </li>
             );
           })}
@@ -59,8 +64,12 @@ export default function Nav() {
       </Container>
       <MenuOverlay overlayRef open={menu}>
         <Info>
-          <Link href="#">Profile </Link>
-          <Link href="#">Blog </Link>
+          <li onClick={() => setMenu(false)}>
+            <Link href="/">Profile </Link>
+          </li>
+          <li onClick={() => setMenu(false)}>
+            <Link href="/blog">Blog </Link>
+          </li>
         </Info>
         <Socials>
           <Link href="#">Facebook </Link>
@@ -74,10 +83,10 @@ export default function Nav() {
 
 const MenuOverlay = styled.div`
   width: 100vw;
-  height: 70vh;
+  height: 80vh;
   position: absolute;
   background-color: white;
-  transform: translateY(-700px);
+  transform: translateY(-800px);
   transition: all 0.6s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -105,7 +114,7 @@ const Info = styled.ul`
   min-height: 300px;
   height: max-content;
   color: black;
-  /* background-color: red; */
+  list-style: none;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -191,7 +200,7 @@ const Container = styled.nav`
 const Logo = styled.img`
   width: 50px;
   height: 50px;
-
+  cursor: pointer;
   z-index: 10;
 `;
 
