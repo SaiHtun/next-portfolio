@@ -54,30 +54,14 @@ export default function Outstagramm() {
           </Left>
           <Right>
             <Description>
-              amet consectetur adipisicing elit. Facilis nostrum non architecto
-              maxime. Blanditiis cum fugiat, cumque quaerat a doloremque
-              reiciendis exercitationem et inventore voluptate obcaecati
-              architecto consequatur sit quasi, delectus voluptatem cupiditate
-              debitis nemo? Quae qui voluptates, aliquid necessitatibus ab eius
-              molestias perspiciatis ut quaerat similique. Voluptates incidunt
-              repellat aspernatur, explicabo quaerat vero, optio itaque possimus
-              excepturi maxime ducimus quos. Ea, dolore praesentium veritatis
-              dicta iste illo quidem fuga, numquam exercitationem modi nulla
-              cumque facere voluptates error ab deleniti. Laboriosam, laborum
-              ipsum reiciendis minus, dolorem quod totam ullam maxime aliquid
-              consequuntur incidunt ad dolores, expedita et harum cumque non.
-              amet consectetur adipisicing elit. Facilis nostrum non architecto
-              maxime. Blanditiis cum fugiat, cumque quaerat a doloremque
-              reiciendis exercitationem et inventore voluptate obcaecati
-              architecto consequatur sit quasi, delectus voluptatem cupiditate
-              debitis nemo? Quae qui voluptates, aliquid necessitatibus ab eius
-              molestias perspiciatis ut quaerat similique. Voluptates incidunt
-              repellat aspernatur, explicabo quaerat vero, optio itaque possimus
-              excepturi maxime ducimus quos. Ea, dolore praesentium veritatis
-              dicta iste illo quidem fuga, numquam exercitationem modi nulla
-              cumque facere voluptates error ab deleniti. Laboriosam, laborum
-              ipsum reiciendis minus, dolorem quod totam ullam maxime aliquid
-              consequuntur incidunt ad dolores, expedita et harum cumque non.
+              <span>Telemartmyanmar</span>First of all, I would like to thanks
+              my very first client from Myanmar for giving me such an
+              opportunity to design and develop their e-commerce website, the
+              initial version of this website will only serve as a look book (
+              displaying available items from the store ) and soon to be added
+              payment and many more features in the future when the company is
+              ready for the delivery infrastructure and online payment. The tech
+              stacks I've used are - React, ApolloGraphql, GraphCMS, and Vercel.
             </Description>
           </Right>
         </Info>
@@ -114,7 +98,9 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div``;
+const Right = styled.div`
+  min-height: 400px;
+`;
 
 const Stacks = styled.ul`
   list-style: none;
@@ -190,6 +176,12 @@ const Description = styled.div`
   font-weight: 250;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.7);
+
+  p {
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 `;
 
 const Container = styled.main`

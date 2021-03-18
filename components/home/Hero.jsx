@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { HomeContext } from "../../contexts/HomeContextProvider";
 import { useContext, useRef, useEffect, useState } from "react";
 import Link from "next/link";
@@ -109,19 +109,38 @@ export default function Hero() {
               </p>
             </div>
           </LandingText>
-          <BtnWrapper slide={btnResume} ref={btnRef} className="btnResume">
-            <Button
-              ref={reRef}
-              className="btnResume"
-              slide={btnResume}
-              onClick={handleResuBtn}
-            >
-              <p>Resume</p>
-            </Button>
-            <Link href="/sai.pdf" download>
-              <File src="/file.svg" alt="file" />
-            </Link>
-          </BtnWrapper>
+          <Wrapper ref={btnRef}>
+            <BtnWrapper slide={btnResume} className="btnResume">
+              <Button
+                ref={reRef}
+                className="btnResume"
+                slide={btnResume}
+                onClick={handleResuBtn}
+              >
+                <p>Resume</p>
+              </Button>
+              <Link href="/sai.pdf" download>
+                <File src="/file.svg" alt="file" />
+              </Link>
+            </BtnWrapper>
+            <SkillsWrapper>
+              <Skills>HTML</Skills>
+              <Skills>CSS</Skills>
+              <Skills>JavaScript</Skills>
+              <Skills>React</Skills>
+              <Skills>Vue</Skills>
+              <Skills>Node.js</Skills>
+              <Skills>REST</Skills>
+              <Skills>Graphql</Skills>
+              <Skills>SQL</Skills>
+              <Skills>NoSQL</Skills>
+              <Skills>Virtualization</Skills>
+              <Skills>Containerization</Skills>
+              <Skills>Docker</Skills>
+              <Skills>Kubernetes</Skills>
+              <Skills>Cloud</Skills>
+            </SkillsWrapper>
+          </Wrapper>
         </div>
         <ScrollDownArrow up={up} onClick={() => goTop()}>
           {upOrDown}
@@ -130,6 +149,48 @@ export default function Hero() {
     </>
   );
 }
+
+const slideAnimation = keyframes`
+  0% {margin-top: -1200px;}
+  10% {margin-top: -1100px;}
+  20% {margin-top: -1000px;}
+  30% {margin-top: -900px;}
+  40% {margin-top: -800px;}
+  50% {margin-top: -700px;}
+  60% {margin-top: -600px;}
+  70% {margin-top: -500px;}
+  80% {margin-top: -400px;}
+  85% {margin-top: -300px;}
+  90% {margin-top: -200px;}
+  95% {margin-top: -100px;}
+  100% {margin-top: 0px;}
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const SkillsWrapper = styled.div`
+  width: 150px;
+  height: 50px;
+  overflow: hidden;
+`;
+
+const Skills = styled.div`
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 50px;
+  padding: 2px 15px;
+  text-align: center;
+
+  &:first-child {
+    animation-name: ${slideAnimation};
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+  }
+`;
 
 const File = styled.img`
   width: 20px;
@@ -201,6 +262,9 @@ const LandingText = styled.div`
     font-size: 4.8em;
     line-height: 80px;
   }
+  @media only screen and (max-width: 500px) {
+    margin: 50px 0px;
+  }
   @media only screen and (max-width: 400px) {
     font-size: 4.7em;
     line-height: 70px;
@@ -253,7 +317,7 @@ const BtnWrapper = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 400px) {
-    margin: 0 auto;
+    /* margin: 0 auto; */
   }
 `;
 

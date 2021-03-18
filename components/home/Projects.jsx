@@ -129,7 +129,7 @@ const projects = [
     name: "Telemartmyanmar",
     description: "E-Commerce",
     imageURL: "/telemart.png",
-    webURL: "https://telemartmyanmar.com",
+    webURL: "https://www.telemartmyanmar.com",
     githubURL: "https://github.com/SaiHtun/telemartmyanmar",
   },
 ];

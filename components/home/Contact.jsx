@@ -197,6 +197,10 @@ const ImageWrapper = styled.div`
 const SaiImage = styled.img`
   height: 300px;
   object-fit: contain;
+
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const TitleWrapper = styled.div`

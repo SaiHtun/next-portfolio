@@ -51,30 +51,13 @@ export default function Outstagramm() {
           </Left>
           <Right>
             <Description>
-              amet consectetur adipisicing elit. Facilis nostrum non architecto
-              maxime. Blanditiis cum fugiat, cumque quaerat a doloremque
-              reiciendis exercitationem et inventore voluptate obcaecati
-              architecto consequatur sit quasi, delectus voluptatem cupiditate
-              debitis nemo? Quae qui voluptates, aliquid necessitatibus ab eius
-              molestias perspiciatis ut quaerat similique. Voluptates incidunt
-              repellat aspernatur, explicabo quaerat vero, optio itaque possimus
-              excepturi maxime ducimus quos. Ea, dolore praesentium veritatis
-              dicta iste illo quidem fuga, numquam exercitationem modi nulla
-              cumque facere voluptates error ab deleniti. Laboriosam, laborum
-              ipsum reiciendis minus, dolorem quod totam ullam maxime aliquid
-              consequuntur incidunt ad dolores, expedita et harum cumque non.
-              amet consectetur adipisicing elit. Facilis nostrum non architecto
-              maxime. Blanditiis cum fugiat, cumque quaerat a doloremque
-              reiciendis exercitationem et inventore voluptate obcaecati
-              architecto consequatur sit quasi, delectus voluptatem cupiditate
-              debitis nemo? Quae qui voluptates, aliquid necessitatibus ab eius
-              molestias perspiciatis ut quaerat similique. Voluptates incidunt
-              repellat aspernatur, explicabo quaerat vero, optio itaque possimus
-              excepturi maxime ducimus quos. Ea, dolore praesentium veritatis
-              dicta iste illo quidem fuga, numquam exercitationem modi nulla
-              cumque facere voluptates error ab deleniti. Laboriosam, laborum
-              ipsum reiciendis minus, dolorem quod totam ullam maxime aliquid
-              consequuntur incidunt ad dolores, expedita et harum cumque non.
+              <span>Outstagramm</span>this is my very first React and Firebase
+              web app, a clone version of "Instagram" and I named it
+              "Outstagramm" 😅, a very simple basic crud app, I made it with no
+              security or performance concerns, probably require tons of
+              refactoring too but let me just keep it that way for now 😬, and
+              it might contain only 0.01% of the actual "Instagram" features but
+              kindly have a look and feel free to test.
             </Description>
           </Right>
         </Info>
@@ -111,7 +94,9 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div``;
+const Right = styled.div`
+  min-height: 400px;
+`;
 
 const Stacks = styled.ul`
   list-style: none;
@@ -120,12 +105,13 @@ const Stacks = styled.ul`
   font-style: italic;
 
   @media only screen and (max-width: 850px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 100px));
     gap: 10px;
   }
   @media only screen and (max-width: 500px) {
     display: flex;
-    gap: 30px;
+    /* gap: 30px; */
   }
 `;
 
@@ -194,6 +180,12 @@ const Description = styled.div`
   font-weight: 250;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.8);
+
+  span {
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 `;
 
 const Container = styled.main`

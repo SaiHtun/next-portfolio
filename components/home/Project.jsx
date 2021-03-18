@@ -80,8 +80,8 @@ const View = styled.p`
   transform: translateY(50px);
   transition: all 0.5s ease-in-out;
   z-index: 2;
-  top: 170px;
-  left: 230px;
+  bottom: 0;
+  right: 0px;
   z-index: 10;
   font-size: 30px;
 
