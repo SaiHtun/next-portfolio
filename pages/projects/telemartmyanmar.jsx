@@ -110,7 +110,12 @@ const Stacks = styled.ul`
 
   @media only screen and (max-width: 850px) {
     display: flex;
-    gap: 10px;
+
+    li {
+      ::after {
+        content: "/";
+      }
+    }
   }
 `;
 
@@ -166,18 +171,27 @@ const Links = styled.div`
     flex-direction: row;
     gap: 10px;
   }
+  @media only screen and (max-width: 500px) {
+    width: 150px;
+    justify-content: space-between;
+  }
 `;
 
 const Description = styled.div`
   width: 100%;
   height: 100%;
-  text-indent: 100px;
-  font-size: 16px;
+  text-indent: 50px;
+  font-size: 18px;
   font-weight: 250;
   line-height: 20px;
-  color: rgba(0, 0, 0, 0.7);
+  font-family: charter, Cambria, Georgia, Times, "Times New Roman", serif;
+  color: rgba(41, 41, 41, 1);
 
-  p {
+  @media only screen and (max-width: 850px) {
+    font-size: 16px;
+  }
+
+  span {
     font-size: 17px;
     font-weight: bold;
     margin-right: 10px;

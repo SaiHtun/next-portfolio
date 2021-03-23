@@ -239,6 +239,12 @@ const LandingText = styled.div`
     color: #d3d3d3;
   }
 
+  small {
+    padding-left: 20px;
+    font-size: 16px;
+    color: plum;
+  }
+
   @media only screen and (max-width: 1180px) {
     font-size: 9em;
   }

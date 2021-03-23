@@ -111,7 +111,12 @@ const Stacks = styled.ul`
   }
   @media only screen and (max-width: 500px) {
     display: flex;
-    /* gap: 30px; */
+
+    li {
+      ::after {
+        content: "/";
+      }
+    }
   }
 `;
 
@@ -168,18 +173,24 @@ const Links = styled.div`
     gap: 10px;
   }
   @media only screen and (max-width: 500px) {
-    gap: 30px;
+    width: 150px;
+    justify-content: space-between;
   }
 `;
 
 const Description = styled.div`
   width: 100%;
   height: 100%;
-  text-indent: 100px;
-  font-size: 16px;
+  text-indent: 50px;
+  font-size: 18px;
   font-weight: 250;
-  line-height: 20px;
-  color: rgba(0, 0, 0, 0.8);
+  line-height: 24px;
+  font-family: charter, Cambria, Georgia, Times, "Times New Roman", serif;
+  color: rgba(41, 41, 41, 1);
+
+  @media only screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 
   span {
     font-size: 17px;

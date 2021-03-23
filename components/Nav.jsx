@@ -16,19 +16,19 @@ export default function Nav() {
   useEffect(() => {
     gsap.from(logoRef.current, {
       opacity: 0,
-      yPercent: 100,
-      duration: 2,
+      yPercent: 20,
+      duration: 1.2,
     });
     gsap.from(menuRef.current, {
       opacity: 0,
-      yPercent: 100,
-      duration: 2,
+      yPercent: 20,
+      duration: 1.2,
       stagger: 0.5,
     });
     gsap.from(hamburgerRef.current, {
       opacity: 0,
-      yPercent: 100,
-      duration: 2,
+      yPercent: 20,
+      duration: 1.2,
       stagger: 0.5,
     });
   }, []);
@@ -42,7 +42,7 @@ export default function Nav() {
           ref={logoRef}
         ></Logo>
         <Menu>
-          {["Profile", "Blog"].map((li, i) => {
+          {["Profile", "Blogs"].map((li, i) => {
             return (
               <li key={i} ref={(e) => (menuRef.current[i] = e)}>
                 {li === "Profile" ? (
@@ -69,7 +69,7 @@ export default function Nav() {
               <Link href="/">Profile </Link>
             </li>
             <li onClick={() => setMenu(false)}>
-              <Link href="/blog">Blog </Link>
+              <Link href="/blogs">Blogs </Link>
             </li>
           </div>
         </Info>
