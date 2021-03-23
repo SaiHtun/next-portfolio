@@ -26,7 +26,11 @@ export default function Outstagramm() {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout
+      title="Project | Outstagramm"
+      name="description"
+      content="Outstagramm is a clone version of Instagramm, built with React and Firebase, designed and developed by Saithun."
+    >
       <Nav></Nav>
       <Container menu={menu}>
         <ProjectImg ref={imgRef} src="/outstagramm.png"></ProjectImg>

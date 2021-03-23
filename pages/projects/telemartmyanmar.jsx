@@ -27,7 +27,11 @@ export default function Outstagramm() {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout
+      title="Project | Telemartmyanmar"
+      name="description"
+      content="Telemartmyanmar is a multi-mobile distributor in Myanmar, designed and develooped by Saihtun."
+    >
       <Nav></Nav>
       <Container menu={menu}>
         <ProjectImg ref={imgRef} src="/telemart.png"></ProjectImg>

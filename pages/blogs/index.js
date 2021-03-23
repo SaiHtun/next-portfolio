@@ -38,7 +38,11 @@ export default function Blogs({ data }) {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout
+      title="Blogs | Tech"
+      name="description"
+      content="Saihtun's open tech space, it's all about Virtualization, Containerization, Cloud and awesome JavaScript stuffs."
+    >
       <Nav></Nav>
       <Container ref={containerRef}>
         <Intro>

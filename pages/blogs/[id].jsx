@@ -2,6 +2,7 @@ import styled from "styled-components";
 // components
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
+import Layout from "../../components/layouts/index";
 // utilities
 import fetchAPI from "../../utilities/fetchAPI";
 // import react hooks
@@ -14,6 +15,7 @@ const GET_BLOG = `
     blog(where: { id: $id }) {
       title
       caption
+      description
       createdAt
       body {
         html
@@ -26,7 +28,6 @@ const GET_TITLES = `
   query {
     blogs {
       id
-      title
     }
   }
 `;
@@ -67,18 +68,25 @@ export default function Blog({ data }) {
   }, []);
 
   return (
-    <Container>
-      <Nav></Nav>
-      <Wrapper ref={wrapperRef}>
-        <TitleWrapper>
-          <Title>{data.blog.title}</Title>
-          <Caption>{data.blog.caption}</Caption>
-          <Time>{new Date(`${data.blog.createdAt}`).toString()}</Time>
-        </TitleWrapper>
-        <Body dangerouslySetInnerHTML={{ __html: data.blog.body.html }}></Body>
-      </Wrapper>
-      <Footer></Footer>
-    </Container>
+    <Layout
+      title={`Blogs | ${data.blog.title}`}
+      name="description"
+      content={data.blog.description}
+    >
+      <Container>
+        <Nav></Nav>
+        <Wrapper ref={wrapperRef}>
+          <TitleWrapper>
+            <Title>{data.blog.title}</Title>
+            <Caption>{data.blog.caption}</Caption>
+            <Time>{new Date(`${data.blog.createdAt}`).toString()}</Time>
+          </TitleWrapper>
+          <Body
+            dangerouslySetInnerHTML={{ __html: data.blog.body.html }}
+          ></Body>
+        </Wrapper>
+      </Container>
+    </Layout>
   );
 }
 

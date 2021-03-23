@@ -44,7 +44,11 @@ export default function Home() {
   });
 
   return (
-    <Layout>
+    <Layout
+      title="Profile | Saihtun"
+      name="description"
+      content="Saihtun is an Ex IT adminstrator ( VMware VCP-DCV 6.5 Certified ), a designer who can code, expertise in modern JavaScript development stacks. "
+    >
       <Overlay>{Boxes}</Overlay>
       <Nav></Nav>
       <Container loading={loading} menu={menu}>
