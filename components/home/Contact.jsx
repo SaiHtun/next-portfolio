@@ -68,11 +68,6 @@ export default function Contact() {
           <SaiImage src="/saisai.jpg"></SaiImage>
         </ImageWrapper>
       </Container>
-      <Footer>
-        <p>
-          Designed and Developed by <span>Sai</span>
-        </p>
-      </Footer>
     </>
   );
 }
@@ -81,18 +76,6 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 500px) {
     justify-self: flex-start;
     align-self: flex-end;
-  }
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  margin-top: -50px;
-
-  span {
-    font-family: "Sacramento", cursive;
   }
 `;
 

@@ -12,24 +12,17 @@ export default function Outstagramm() {
   const { menu } = useContext(HomeContext);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-
-    tl.from(imgRef.current, {
+    gsap.from(imgRef.current, {
       yPercent: 1000,
-      scale: 0.8,
       opacity: 0,
       duration: 1.2,
     });
 
-    tl.from(
-      textRef.current,
-      {
-        yPercent: 50,
-        opacity: 0,
-        duration: 1,
-      },
-      "-=.5"
-    );
+    gsap.from(textRef.current, {
+      yPercent: 1000,
+      opacity: 0,
+      duration: 1.2,
+    });
   }, []);
 
   return (
@@ -40,8 +33,8 @@ export default function Outstagramm() {
         <Info ref={textRef}>
           <Left>
             <Links>
-              <Link href="#">Github</Link>
-              <Link href="#">Website</Link>
+              <Link href="https://github.com/SaiHtun/outstagramm">Github</Link>
+              <Link href="https://outstagramm-2bbb5.web.app">Website</Link>
             </Links>
             <Stacks>
               {["React", "SCSS", "Firebase"].map((tech, i) => {
@@ -61,27 +54,10 @@ export default function Outstagramm() {
             </Description>
           </Right>
         </Info>
-        <Footer>
-          <p>
-            Designed and Developed by <span>Sai</span>
-          </p>
-        </Footer>
       </Container>
     </MainLayout>
   );
 }
-
-const Footer = styled.div`
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  margin-top: -50px;
-
-  span {
-    font-family: "Sacramento", cursive;
-  }
-`;
 
 const Left = styled.div`
   display: grid;
@@ -173,7 +149,7 @@ const Links = styled.div`
     gap: 10px;
   }
   @media only screen and (max-width: 500px) {
-    width: 150px;
+    width: 100px;
     justify-content: space-between;
   }
 `;

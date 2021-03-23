@@ -49,14 +49,18 @@ export default function Blogs({ data }) {
             blog from my entire life, i have quite a few purposes for doing
             that, so usually i love taking notes on a random paper and having a
             hard time finding them when it’s needed, thus i just thought of
-            writing notes as a blog so i can always come back and refresh my
-            memories, on the other hand English is my 4th language and i found
-            myself grammatically horrible sometimes, so i just want to improve
-            my english through writing blogs and want to share the technology
-            related information for the beginners just like me or who ever
-            needed in a naive way. Please don't mind if you are having trouble
-            reading my blog post and correct me if i was wrong, anyway i’m here
-            to get started from one blog and many more to go yo !
+            writing notes as a blog so i can always come back to refresh my
+            memories and simply just want to share the technology related
+            information to the beginner or who ever needed in a naive way, on
+            the other hand English is my 4th language and i found myself
+            grammatically horrible sometimes, so i just want to improve my
+            english through writing blogs, i’m an Ex IT System Administrator (
+            VMware Certified ) and currently a modern JavaScript Stacks
+            developer, so i’ll be focus on writing Virtualization,
+            Containerization, Cloud and of cause JS stuffs. Please don't mind if
+            you are having trouble reading my blog post and correct me if i was
+            wrong, anyway i’m here to get started from one blog and many more to
+            go yo !
           </p>
         </Intro>
         <Topics>
@@ -75,14 +79,16 @@ export default function Blogs({ data }) {
 
 const Container = styled.main`
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   padding: 0px 100px;
+  overflow-y: auto;
 
   @media only screen and (max-width: 800px) {
     padding: 0px 50px;
   }
   @media only screen and (max-width: 500px) {
     padding: 0px 20px;
+    height: max-content;
   }
 `;
 
@@ -99,7 +105,9 @@ const Intro = styled.div`
       line-height: 40px;
     }
     @media only screen and (max-width: 500px) {
+      font-size: 1.5em;
       line-height: 30px;
+      margin-top: 30px;
     }
   }
 
@@ -111,6 +119,7 @@ const Intro = styled.div`
 const Topics = styled.ol`
   margin-top: 30px;
   margin-left: 20px;
+  min-height: 50vh;
   font-size: 21px;
   counter-reset: listCounter;
 
@@ -118,5 +127,9 @@ const Topics = styled.ol`
     counter-increment: listCounter;
     font-weight: bold;
     margin-bottom: 10px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    font-size: 16px;
   }
 `;

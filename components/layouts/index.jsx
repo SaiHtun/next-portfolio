@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { HomeContext } from "../../contexts/HomeContextProvider";
+import Footer from "../Footer";
 
 export default function Layout({ children }) {
   const { handleCloseResumeBtn } = useContext(HomeContext);
@@ -8,6 +9,7 @@ export default function Layout({ children }) {
   return (
     <Container onClick={(e) => handleCloseResumeBtn(e.target)}>
       {children}
+      <Footer></Footer>
     </Container>
   );
 }
