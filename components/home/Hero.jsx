@@ -119,7 +119,7 @@ export default function Hero() {
               >
                 <p>Resume</p>
               </Button>
-              <Link href="/sai.pdf" download>
+              <Link href="/sai's resume.pdf" download>
                 <File src="/file.svg" alt="file" />
               </Link>
             </BtnWrapper>
